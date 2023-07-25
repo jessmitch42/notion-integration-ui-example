@@ -1,24 +1,27 @@
 // This file is run by the browser each time your view template is loaded
 
-// define variables that reference elements on our page
-
-// forms
+// Define variables that reference elements on our page:
+// Forms
 const dbForm = document.getElementById("databaseForm");
 const pageForm = document.getElementById("pageForm");
 const blocksForm = document.getElementById("blocksForm");
 const commentForm = document.getElementById("commentForm");
-// table cells where api responses will be added
+// Table cells where API responses will be appended
 const dbResponse = document.getElementById("dbResponse");
 const pageResponse = document.getElementById("pageResponse");
 const blocksResponse = document.getElementById("blocksResponse");
 const commentResponse = document.getElementById("commentResponse");
 
-// a helper function that adds the api response to the UI
+// Adds the API response to the UI
 const appendApiResponse = function (res, el) {
   console.log(res);
+
   const result = document.createElement("p");
   result.innerHTML = "Result: " + res.message;
   el.appendChild(result);
+  // See browser console for more information
+  if (res.message === "error") return;
+
   const id = document.createElement("p");
   id.innerHTML = "ID: " + res.data.id;
   el.appendChild(id);
@@ -31,6 +34,7 @@ const appendApiResponse = function (res, el) {
   }
 };
 
+// Adds the blocks API response to the UI
 const appendBlocksResponse = function (res, el) {
   const result = document.createElement("p");
   result.innerHTML = "Result: " + res.message;
@@ -40,7 +44,7 @@ const appendBlocksResponse = function (res, el) {
   el.appendChild(id);
 };
 
-// listen for the form to be submitted
+// Attach submit event to each form
 dbForm.onsubmit = async function (event) {
   event.preventDefault();
   console.log(event.target.dbName.value);
