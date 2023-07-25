@@ -1,12 +1,18 @@
-# Notion internal integration with a UI example
+# Notion internal integration example
 
-## About the integration
+## Use web forms to create new databases, pages, page content, and comments
 
-This demo shows how to build an internal integration that allows users to interact with a basic user interface to create new Notion databases, pages, blocks (page content), and comments.
+### About the integration
 
-This demo is referenced in the [Create an integration guide](https://developers.notion.com/docs/create-a-notion-integration) -- an introductory guide to building internal integrations and working with Notion's public API. The goal of this integration is to show how to build a full-stack app where user interactions on the frontend will trigger Notion API calls, and, as a result, make the corresponding updates in your Notion workspace.
+This demo shows how to build an internal integration that allows users to fill out a web form to create new Notion databases, pages, blocks (page content), and comments.
 
-## File structure
+![Database form submitted successfully](homescreen.png)
+
+This demo is referenced in the [Create an integration guide](https://developers.notion.com/docs/create-a-notion-integration) -- an introductory guide to building internal integrations and working with Notion's public API.
+
+The goal of this integration is to show how to build a full-stack app where user interactions on the frontend will trigger Notion API calls, and, as a result, make the corresponding updates in your Notion workspace.
+
+### File structure
 
 On the frontend, this demo includes:
 
@@ -18,7 +24,7 @@ On the backend, this demo includes:
 
 - `server.js`, which serves `index.html` and defines the endpoints used in the client-side JS code. All Notion public API usage is included in this file.
 
-### Notion endpoints used
+#### Notion endpoints used
 
 This demo includes the following Notion endpoint usage:
 
@@ -29,9 +35,13 @@ This demo includes the following Notion endpoint usage:
 
 This demo can be expanded further to test other endpoints, as well. For example, you could add a button retrieve all database pages or to delete existing pages.
 
-## Running locally
+Some "real-world" applications could include allowing users to comment on blog posts through a web form and saving those submissions to a Notion page. It could also be used to save app feedback from users.
 
-### 1. Set up your local project
+---
+
+### Running locally
+
+#### 1. Set up your local project
 
 ```zsh
 # Clone this repository locally
@@ -44,7 +54,7 @@ cd notion-sdk-js/examples/internal-integration-with-ui
 npm install
 ```
 
-### 2. Set your environment variables in a `.env` file
+#### 2. Set your environment variables in a `.env` file
 
 A `.env.example` file has been included and can be renamed `.env`. Update the environment variables below:
 
@@ -58,9 +68,9 @@ NOTION_PAGE_ID=<notion-page-id>
 `NOTION_PAGE_ID`: Use the ID of any Notion page. This page will be the parent of all content created through this integration.
 
 The page ID is the 32 character string at the end of any page URL.
-![A Notion page URL with the ID highlighted](./assets/page_id.png)
+![A Notion page URL with the ID highlighted](./public/assets//page_id.png)
 
-### 3. Give the integration access to your page
+#### 3. Give the integration access to your page
 
 Your Notion integration will need permission to create new databases, etc. To provide access, do the following:
 
@@ -71,21 +81,23 @@ Your Notion integration will need permission to create new databases, etc. To pr
 
 Once selected, your integration will have permission to read/write content on the page.
 
-### 4. Run code
+#### 4. Run code
 
 ```zsh
 node server.js
 ```
 
-## Using this app
+### Using this app
 
 To use this demo app, start by creating a new database via the database form:
-![Database form UI]()
+![Database form UI](./public/assets/homescreen.png)
 
 The ID of the new database can be used in the next form to create a new page:
-![Page form UI]()
+![Page form UI](./public/assets/pageform.png)
 
 The blocks and comment forms will accept the page ID that is returned from the page form to create new page content (blocks) and comments.
+![Blocks form UI](./public/assets/blocksform.png)
+![Comments form UI](./public/assets/commentform.png)
 
 If you have the IDs for other databases/pages, you can use them as long as you have shared the target databases/pages with the internal integration.
 
